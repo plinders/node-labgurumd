@@ -1,4 +1,5 @@
 node_modules
 obj.json
 obj2.json
-*.md
+obj.md
+obj2.md
