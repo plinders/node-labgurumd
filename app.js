@@ -14,29 +14,38 @@ turndownService.use(gfm)
 // Use the table and strikethrough plugins only
 turndownService.use([tables, strikethrough])
 
-var jsonFile = fs.readFileSync('obj.json', 'UTF8');
 
-var data = JSON.parse(jsonFile);
-var title = `<h1>${data.title}</h1>`;
-var doc = title;
 
-for (section of data.procedures) {
-    var sectionText = '';
-    var sectionTitle = `<h2>${section.sectionName}</h2>`;
-    for (element of section.elements) {
-        var elementText = '';
-        var elementBody = element.data;
-        elementText += elementBody;
-        sectionText += elementText;
+const translateJson = (file) => {
+    var jsonFile = fs.readFileSync(file, 'UTF8');
+    var fileName = file.slice(0, -5);
+    var data = JSON.parse(jsonFile);
+    var title = `<h1>${data.title}</h1>`;
+    var doc = title;
+
+    for (section of data.procedures) {
+        var sectionText = '';
+        var sectionTitle = `<h2>${section.sectionName}</h2>`;
+        for (element of section.elements) {
+            var elementText = '';
+            var elementBody = element.data;
+            elementText += elementBody;
+            sectionText += elementText;
+        };
+        doc += sectionTitle + sectionText;
     };
-    doc += sectionTitle + sectionText;
+
+    var markdown = turndownService.turndown(doc);
+
+    fs.writeFileSync(`${file}.md`, markdown);
 };
 
+fs.readdir('./current/', (err, files) => {
+  files.forEach(file => {
+    translateJson(`./current/${file}`);
+  });
+});
 
-
-var markdown = turndownService.turndown(doc);
-
-fs.writeFileSync('obj.md', markdown);
 
 
 
