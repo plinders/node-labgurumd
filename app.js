@@ -14,7 +14,7 @@ turndownService.use(gfm)
 // Use the table and strikethrough plugins only
 turndownService.use([tables, strikethrough])
 
-var jsonFile = fs.readFileSync('obj2.json', 'UTF8');
+var jsonFile = fs.readFileSync('obj.json', 'UTF8');
 
 var data = JSON.parse(jsonFile);
 var title = `<h1>${data.title}</h1>`;
@@ -36,7 +36,7 @@ for (section of data.procedures) {
 
 var markdown = turndownService.turndown(doc);
 
-fs.writeFileSync('obj2.md', markdown);
+fs.writeFileSync('obj.md', markdown);
 
 
 
