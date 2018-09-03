@@ -37,15 +37,15 @@ const translateJson = (file) => {
 
     var markdown = turndownService.turndown(doc);
 
-    fs.writeFileSync(`${file}.md`, markdown);
+    fs.writeFileSync(`${fileName}.md`, markdown);
 };
 
-fs.readdir('./current/', (err, files) => {
-  files.forEach(file => {
-    translateJson(`./current/${file}`);
-  });
-});
+// fs.readdir('./current/', (err, files) => {
+//   files.forEach(file => {
+//     translateJson(`./current/${file}`);
+//   });
+// });
 
-
+translateJson('obj.json');
 
 
