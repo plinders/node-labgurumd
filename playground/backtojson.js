@@ -1,27 +1,29 @@
 const showdown = require('showdown');
 const fs = require('fs');
-const cheerio = require('cheerio')
+const JFile = require('jfile');
 
 
 showdown.setFlavor('github');
 showdown.setOption('tables', true);
 
-const inputString = fs.readFileSync('input.md', 'UTF8');
+// const inputString = fs.readFileSync('input.md', 'UTF8');
 
-var converter = new showdown.Converter();
-
-var html = converter.makeHtml(inputString);
-
-const $ = cheerio.load(html, {
-    xmlMode: true, 
-    decodeEntities: false
-});
-
-// console.log($('h2').nextAll().html());
-
-$('h2').each(function(i, elem) {
-    console.log(`====== ${$(this).text()}`);
-});
+const file = new JFile('input.md');
+// console.log(file.lines);
 
 
-//fs.writeFileSync('out.html', html);
+file.lines.forEach((line, index) => {
+    if (line.match(/(^## )/m)) {
+        console.log(index, line);
+    }
+})
+
+
+
+// console.log(lines);
+
+
+//var converter = new showdown.Converter();
+
+//var html = converter.makeHtml(inputString);
+

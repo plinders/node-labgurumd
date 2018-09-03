@@ -1,15 +1,12 @@
-180724 PL004.16 – Subcloning of truncated ST6GAL1 and MGAT2 into pRpHL2\-N1
-===========================================================================
+# 180724 PL004.16 – Subcloning of truncated ST6GAL1 and MGAT2 into pRpHL2\-N1
 
-Description
------------
+## Description
 
 In our next effort to improve the pH probes, we have settled on using truncated forms of the full length transferases we used previously. This means we only want to express the signal peptide (if any) and transmembrane region but not the catalytic site. Fortunately, for some constructs this truncated form has already been described, and this is also the case for ST6GAL1 ([https://www.addgene.org/65262/](https://www.addgene.org/65262/)). For MGAT2, this truncated form has not been described. For both constructs, we have PCRd the CDS from their original vectors previously (PL014.4)
 
   
 
-In silico preparation for subcloning
-------------------------------------
+## In silico preparation for subcloning
 
 To prepare the subcloning and to be able to verify the results easily afterwards, we simulate the experiment with SnapGene.
 
@@ -18,8 +15,7 @@ To prepare the subcloning and to be able to verify the results easily afterwards
 *   MGAT2\_trunc\-RpHL2.pdf
 *   ST6GAL1\_trunc\-RpHL2.pdf
 
-Restriction digest of ST6GAL1, MGAT, pRpHL2\-N1
------------------------------------------------
+## Restriction digest of ST6GAL1, MGAT, pRpHL2\-N1
 
 Double digests were checked at [](https://www.neb.com/tools-and-resources/interactive-tools/double-digest-finder)[https://www.neb.com/tools\-and\-resources/interactive\-tools/double\-digest\-finder](https://www.neb.com/tools-and-resources/interactive-tools/double-digest-finder) to find the appropriate buffers.
 
@@ -59,8 +55,7 @@ _Plasmids_
 
 *   RpHLuorin2 empty vector
 
-Ligation of MGAT2, ST6GAL1 into pRpHL2
---------------------------------------
+## Ligation of MGAT2, ST6GAL1 into pRpHL2
 
 Before ligation of the respective inserts into their new vectors, the vectors will first be dephosphorylated to mitigate self\-ligation. Even though the restriction sites we have chosen would not facilitate self\-ligation, it is good to perform this step regardless just for posterity. The ratio of [vector:insert](https://radboudumc.labguru.com/knowledge/experiments/vector%3Ainsert) is 1:3, we will use 200 ng vector. We will use the Promega BioMath ([](http://www.promega.com/a/apps/biomath/index.html?calc=ugpmols)[http://www.promega.com/a/apps/biomath/index.html?calc=ugpmols](http://www.promega.com/a/apps/biomath/index.html?calc=ugpmols)) calculator to convert to pmol and µL DNA.
 
@@ -86,13 +81,11 @@ Perform the dephosphorylation at 37°C for 20 mins, then inactivate SAP at 70°C
 
 Ligate for ~15 mins at room temperature, store on ice and then transform into competent bacteria (DH5α) (1\-2 µL/100µL bacteria).
 
-Transformation DH5alpha Description
------------------------------------
+## Transformation DH5alpha Description
 
 Transformation of DNA into competent bacteria is an essential part of expressing recombinant proteins, generating more DNA via mini/midi/maxipreps, verifying successful ligation reactions etc.
 
-Transformation DH5alpha Procedure
----------------------------------
+## Transformation DH5alpha Procedure
 
 ### Steps:
 
@@ -121,13 +114,11 @@ Transformation DH5alpha Procedure
 
 Control plate was empty, many colonies for MGAT2, not so many for ST6GAL1 but still around 10. We proceeded with PCR screening.
 
-PCR screen Description
-----------------------
+## PCR screen Description
 
 After establishing that there are positive colonies after bacterial transformation, we run a PCR to confirm the presence of the desired inserts.
 
-PCR screen Procedure
---------------------
+## PCR screen Procedure
 
 ### Steps:
 
@@ -176,13 +167,11 @@ _Primers_
 *   pEGFP\-all
 *   pEGFP\-CMV
 
-Midiprep Description
---------------------
+## Midiprep Description
 
 _Use normal isolation kits (_NucleoBond Xtra Midi_) for plasmids that are used for cloning and bacterial expression and use endofree kits (NucleoBond Xtra Midi EF)  for plasmids that are used in cell lines and primary cells._
 
-Midiprep Procedure
-------------------
+## Midiprep Procedure
 
 ### Steps:
 
@@ -251,13 +240,11 @@ Pellets were dissolved in 100 µL H<sub>2</sub>O\-EF and later diluted to 2 µg/
 
 <table style="width: 100%;"><tbody><tr><td style="width: 50.0484%;"><strong>Construct</strong><br></td><td style="width: 49.9516%;"><strong>Concentration µg/µL</strong><br></td></tr><tr><td style="width: 50.0484%;">MGAT2_truncated-RpHL2</td><td style="width: 49.9516%;">7.4</td></tr><tr><td style="width: 50.0484%;">ST6-RpHL2</td><td style="width: 49.9516%;">8.3</td></tr></tbody></table>
 
-Sequencing Description
-----------------------
+## Sequencing Description
 
 DNA sequencing — This protocol describes the  labwork regarding  DNA for sequencing. 
 
-Sequencing Procedure
---------------------
+## Sequencing Procedure
 
 Attached is the general protocol from sequencing facility.  
   
@@ -292,12 +279,10 @@ _Primers_
 *   ST6GAL1\_trunc\-RpHL2\_alignment.pdf
 *   MGAT2\_trunc\-RpHL2\_alignment.pdf
 
-Results
--------
+## Results
 
 Based on the sequences, PCR amplification of ST6 and MGAT2 from their respective vector succeeded, as did ligation of the fragments into pRpHL2\-N1.
 
-Conclusion
-----------
+## Conclusion
 
 Based on the sequences, PCR amplification of ST6 and MGAT2 from their respective vector succeeded, as did ligation of the fragments into pRpHL2\-N1.
