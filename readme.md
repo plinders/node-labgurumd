@@ -40,7 +40,6 @@ node <input>.json
 
 ## Todo
 
-* Find a way to parse steps
 * Include images inline
 * Work out how to include samples (e.g. plasmids, primers)
- 
+* Implement bidirectional translation
