@@ -6,7 +6,7 @@ var turndownPluginGfm = require('turndown-plugin-gfm')
 var gfm = turndownPluginGfm.gfm
 var tables = turndownPluginGfm.tables
 var strikethrough = turndownPluginGfm.strikethrough
-var turndownService = new TurndownService();
+var turndownService = new TurndownService({'headingStyle':'atx'});
 turndownService.keep(['sup', 'sub']);
 // Use the gfm plugin
 turndownService.use(gfm)

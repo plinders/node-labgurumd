@@ -17,10 +17,10 @@ const $ = cheerio.load(html, {
     decodeEntities: false
 });
 
-console.log($('h2').nextUntil('h3').html());
+// console.log($('h2').nextAll().html());
 
 $('h2').each(function(i, elem) {
-    console.log(`====== ${$(this).nextUntil('h3').html()}`);
+    console.log(`====== ${$(this).text()}`);
 });
 
 
