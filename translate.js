@@ -8,7 +8,7 @@ showdown.setOption('tables', true);
 const converter = new showdown.Converter();
 
 const makeElementObj = (section) => {
-    var sectionName = converter.makeHtml(section[0]);
+    var sectionName = section[0].slice(3, section[0].length);
     if (section[0].match(/(^## Results)/)) {
         var sectionType = "results";
     } else if (section[0].match(/(^## Conclusion)/)) {
@@ -32,9 +32,12 @@ const makeElementObj = (section) => {
 
     elements.push(firstObj);
 
+    
+
     // this is not working, need fix
-    var elementList = section[-1];
-    if (Array.isArray(elementList)) {
+    if (Array.isArray(section[section.length - 1])) {
+        var elementList = section[section.length - 1];        
+
         for (i = 0; i < elementList.length; i++) {
             var position = (i + 2) // as the 1st position is always taken
             var joinedData = elementList[i].join('\n');
@@ -67,7 +70,7 @@ const makeExperimentObj = (file) => {
 
     var procedures = sections.map(section => makeElementObj(section));
     var experimentObj = {
-        "title": converter.makeHtml(title),
+        "title": title.slice(2, title.length),
         procedures 
     };
 
