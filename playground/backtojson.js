@@ -5,8 +5,10 @@ const translate = require('../translate.js');
 const parseMD = require('../parseMD.js');
 
 
-const file = new JFile('input.md');
+const file = new JFile('../180821\ PL040\.1.md');
 
 
 var obj = translate.makeExperimentObj(file);
-console.log(JSON.stringify(obj, undefined, 2));
+fs.writeFileSync('exp.json', JSON.stringify(obj, undefined, 2));
+
+
