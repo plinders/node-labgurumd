@@ -1,14 +1,16 @@
 const fs = require('fs');
 const JFile = require('jfile');
+const path = require('path');
 
-const translate = require('../translate.js');
-const parseMD = require('../parseMD.js');
+const makeObj = require('../make_obj.js');
 
+const toJSON = (file) => {
+    const filename = path.parse(filename).name;
+    const openFile = new JFile(file);
+    var obj = makeObj.makeExperimentObj(openFile);
+    fs.writeFileSync(`${filename}.json`, JSON.stringify(obj, undefined, 2))
+};
 
-const file = new JFile('../180821\ PL040\.1.md');
-
-
-var obj = translate.makeExperimentObj(file);
-fs.writeFileSync('exp.json', JSON.stringify(obj, undefined, 2));
-
-
+module.exports = {
+    toJSON
+};

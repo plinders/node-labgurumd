@@ -1,51 +1,29 @@
-const fs = require('fs');
-const TurndownService = require('turndown');
+const yargs = require('yargs');
 
-// Import plugins from turndown-plugin-gfm
-var turndownPluginGfm = require('turndown-plugin-gfm')
-var gfm = turndownPluginGfm.gfm
-var tables = turndownPluginGfm.tables
-var strikethrough = turndownPluginGfm.strikethrough
-var turndownService = new TurndownService({'headingStyle':'atx'});
-turndownService.keep(['sup', 'sub']);
-// Use the gfm plugin
-turndownService.use(gfm)
+const translate = require('./translate.js');
 
-// Use the table and strikethrough plugins only
-turndownService.use([tables, strikethrough])
+const argv = yargs
+    .options({
+        j: {
+            alias: 'json',
+            describe: 'JSON file to translate to Markdown',
+            string: true
+        },
+        m: {
+            alias: 'markdown',
+            describe: 'MD file to translate to JSON',
+            string: true
+        }
+    })
+    .help()
+    .alias('help', 'h')
+    .demandCommand(1)
+    .argv;
 
-
-
-const translateJson = (file) => {
-    var jsonFile = fs.readFileSync(file, 'UTF8');
-    var fileName = file.slice(0, -5);
-    var data = JSON.parse(jsonFile);
-    var title = `<h1>${data.title}</h1>`;
-    var doc = title;
-
-    for (section of data.procedures) {
-        var sectionText = '';
-        var sectionTitle = `<h2>${section.sectionName}</h2>`;
-        for (element of section.elements) {
-            var elementText = '';
-            var elementBody = element.data;
-            elementText += elementBody;
-            sectionText += elementText;
-        };
-        doc += sectionTitle + sectionText;
-    };
-
-    var markdown = turndownService.turndown(doc);
-
-    fs.writeFileSync(`${fileName}.md`, markdown);
+if (argv.json) {
+    translate.toMD(argv.json);
 };
 
-// fs.readdir('./current/', (err, files) => {
-//   files.forEach(file => {
-//     translateJson(`./current/${file}`);
-//   });
-// });
-
-translateJson('obj.json');
-
-
+if (argv.markdown) {
+    translate.toJSON(argv.markdown)
+};

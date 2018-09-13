@@ -1,82 +1,57 @@
-const showdown = require('showdown');
+const fs = require('fs');
+const JFile = require('jfile');
+const path = require('path');
+const TurndownService = require('turndown');
 
-const parseMD = require('./parseMD.js');
+const makeObj = require('./make_obj.js');
 
-showdown.setFlavor('github');
-showdown.setOption('tables', true);
+// Import plugins from turndown-plugin-gfm
+var turndownPluginGfm = require('turndown-plugin-gfm')
+var gfm = turndownPluginGfm.gfm
+var tables = turndownPluginGfm.tables
+var strikethrough = turndownPluginGfm.strikethrough
+var turndownService = new TurndownService({
+    'headingStyle': 'atx'
+});
+turndownService.keep(['sup', 'sub']);
+// Use the gfm plugin
+turndownService.use(gfm)
 
-const converter = new showdown.Converter();
+// Use the table and strikethrough plugins only
+turndownService.use([tables, strikethrough])
 
-const makeElementObj = (section) => {
-    var sectionName = section[0].slice(3, section[0].length);
-    if (section[0].match(/(^## Results)/)) {
-        var sectionType = "results";
-    } else if (section[0].match(/(^## Conclusion)/)) {
-        var sectionType = "conclusion";
-    } else {
-        var sectionType = "description";
-    }
-    var elements = [];
-
-    // first element
-    var sectionLines = section.slice(1, -1);
-    var sectionText = sectionLines.join('\n');
-
-    var firstObj = {
-        "position": 1,
-        "type": "text",
-        "containerType": "ExperimentProcedure",
-        "fieldName": "procedure",
-        "data": converter.makeHtml(sectionText)
-    };
-
-    elements.push(firstObj);
-
-    
-
-    // this is not working, need fix
-    if (Array.isArray(section[section.length - 1])) {
-        var elementList = section[section.length - 1];        
-
-        for (i = 0; i < elementList.length; i++) {
-            var position = (i + 2) // as the 1st position is always taken
-            var joinedData = elementList[i].join('\n');
-            var data = converter.makeHtml(joinedData);
-    
-            var element = {
-                position,
-                "type": "text",
-                "containerType": "ExperimentProcedure",
-                "fieldName": "procedure",
-                data
-            };
-            elements.push(element);
-        };
-    }; 
-
-    var sectionObj = {
-        sectionName,
-        sectionType,
-        elements
-    }
-
-    return sectionObj;
+const toJSON = (file) => {
+    const filename = path.parse(file).name;
+    const openFile = new JFile(file);
+    var obj = makeObj.makeExperimentObj(openFile);
+    fs.writeFileSync(`${filename}.json`, JSON.stringify(obj, undefined, 2))
 };
 
+const toMD = (file) => {
+    var jsonFile = fs.readFileSync(file, 'UTF8');
+    const filename = path.parse(file).name;
+    var data = JSON.parse(jsonFile);
+    var title = `<h1>${data.title}</h1>`;
+    var doc = title;
 
-const makeExperimentObj = (file) => {
-    var sections = parseMD.splitH2Headings(file);
-    var title = parseMD.getTitle(file);
-
-    var procedures = sections.map(section => makeElementObj(section));
-    var experimentObj = {
-        "title": title.slice(2, title.length),
-        procedures 
+    for (section of data.procedures) {
+        var sectionText = '';
+        var sectionTitle = `<h2>${section.sectionName}</h2>`;
+        for (element of section.elements) {
+            var elementText = '';
+            var elementBody = element.data;
+            elementText += elementBody;
+            sectionText += elementText;
+        };
+        doc += sectionTitle + sectionText;
     };
 
-    return experimentObj;
+    var markdown = turndownService.turndown(doc);
+
+    fs.writeFileSync(`${filename}.md`, markdown);
 };
 
 module.exports = {
-    makeExperimentObj
+    toJSON,
+    toMD
 };

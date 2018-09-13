@@ -19,20 +19,23 @@ npm i
 
 ### Running
 
-For now you will need to edit the code manually to translate objects.
-
-**Intended use:**
+**Usage:**
 
 ```
-node <input>.md
+node app.js -m, --markdown <input>.md
 ```
 
 Or
 
 ```
-node <input>.json
+node app.js -j, --json <input>.json
 ```
 
+For help:
+
+```
+node app.js -h, --help
+```
 
 ## Authors
 
@@ -42,4 +45,3 @@ node <input>.json
 
 * Include images inline
 * Work out how to include samples (e.g. plasmids, primers)
-* Implement bidirectional translation
