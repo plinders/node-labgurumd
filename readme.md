@@ -22,19 +22,19 @@ npm i
 **Usage:**
 
 ```
-node app.js -m, --markdown <input>.md
+$ node app.js -m <input>.md, --markdown <input>.md
 ```
 
 Or
 
 ```
-node app.js -j, --json <input>.json
+$ node app.js -j <input>.json, --json <input>.json
 ```
 
 For help:
 
 ```
-node app.js -h, --help
+$ node app.js -h, --help
 ```
 
 ## Authors
