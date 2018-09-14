@@ -17,7 +17,6 @@ const argv = yargs
     })
     .help()
     .alias('help', 'h')
-    .demandCommand(1)
     .argv;
 
 if (argv.json) {

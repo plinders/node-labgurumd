@@ -41,6 +41,10 @@ $ node app.js -h, --help
 
 * **Peter Linders** - *Initial work* - [plinders](https://github.com/plinders)
 
+## License
+
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+
 ## Todo
 
 * Include images inline
